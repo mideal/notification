@@ -103,7 +103,7 @@ jobs:
           path: vendor/
           key: vendor-${{ hashFiles('composer.lock') }}
 
-      - run: echo "APP_KEY=$(php artisan key:generate --show --ansi)" >> $GITHUB_ENV
+      - run: echo "APP_KEY=$(php artisan key:generate --show --no-ansi)" >> $GITHUB_ENV
 
       - run: ./vendor/bin/phpunit --coverage-text --colors=never --coverage-cobertura=coverage.cobertura.xml
 
