@@ -10,7 +10,7 @@ parameters:
     # Level 10 is the highest level
     level: 9
 
-    ignoreErrors:
-        - identifier: missingType.iterableValue
+    #ignoreErrors:
+    #    - identifier: missingType.iterableValue
 
     treatPhpDocTypesAsCertain: false
