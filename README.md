@@ -2,3 +2,31 @@
 
 [![CI](https://github.com/mideal/notification/actions/workflows/ci.yml/badge.svg)](https://github.com/mideal/notification/actions/workflows/ci.yml)
 [![Coverage](https://codecov.io/gh/mideal/notification/branch/main/graph/badge.svg)](https://codecov.io/gh/mideal/notification)
+
+## Запуск через Docker
+
+**1. Скопировать файл окружения и заполнить переменные**
+
+```bash
+cp .env.example .env
+```
+
+**2. Собрать и запустить контейнеры**
+
+```bash
+docker-compose up -d --build
+```
+
+**3. Сгенерировать ключ приложения**
+
+```bash
+docker-compose exec php php artisan key:generate
+```
+
+**4. Выполнить миграции**
+
+```bash
+docker-compose exec php php artisan migrate
+```
+
+Приложение доступно по адресу: [http://localhost:8080](http://localhost:8080)
