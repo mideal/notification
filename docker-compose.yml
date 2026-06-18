@@ -95,6 +95,54 @@ services:
     networks:
       - notification
 
+  consumer-transactional:
+    build:
+      context: ./docker/php-fpm
+      dockerfile: Dockerfile
+    container_name: notification-consumer-transactional
+    working_dir: /var/www
+    entrypoint: []
+    command: php artisan notifications:consume --topic=notifications.transactional --group=notification-transactional
+    restart: unless-stopped
+    volumes:
+      - ./docker/php-fpm/config/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./:/var/www
+    depends_on:
+      php:
+        condition: service_started
+      kafka:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - notification
+
+  consumer-marketing:
+    build:
+      context: ./docker/php-fpm
+      dockerfile: Dockerfile
+    container_name: notification-consumer-marketing
+    working_dir: /var/www
+    entrypoint: []
+    command: php artisan notifications:consume --topic=notifications.marketing --group=notification-marketing
+    restart: unless-stopped
+    volumes:
+      - ./docker/php-fpm/config/local.ini:/usr/local/etc/php/conf.d/local.ini
+      - ./:/var/www
+    depends_on:
+      php:
+        condition: service_started
+      kafka:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - notification
+
 volumes:
   postgres-data:
   kafka-data:
